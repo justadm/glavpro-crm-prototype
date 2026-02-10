@@ -86,6 +86,13 @@ $actionConfig = [
 <div><strong>Компания:</strong> <?php echo htmlspecialchars((string) $company->name); ?></div>
 <div><strong>Текущая стадия:</strong> <?php echo htmlspecialchars((string) $company->stage_code); ?></div>
 
+<?php if ((int) $company->id === 0) : ?>
+    <form method="post" action="index.php?option=com_glavpro_crm&task=company.createDemo">
+        <button type="submit">Создать демо-компанию</button>
+        <?php echo HTMLHelper::_('form.token'); ?>
+    </form>
+<?php endif; ?>
+
 <h3>Доступные действия</h3>
 <?php if (empty($actions)) : ?>
     <div>Нет доступных действий</div>

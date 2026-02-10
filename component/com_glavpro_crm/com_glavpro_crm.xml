@@ -13,9 +13,15 @@
     <administration>
         <menu>Glavpro CRM</menu>
         <files folder="administrator/components/com_glavpro_crm">
+            <filename>config.json</filename>
+            <filename>config.xml</filename>
+            <filename>menu.xml</filename>
+            <filename>router.php</filename>
             <folder>src</folder>
             <folder>tmpl</folder>
             <folder>sql</folder>
+            <folder>services</folder>
+            <folder>Controller</folder>
         </files>
     </administration>
 

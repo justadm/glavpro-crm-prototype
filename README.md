@@ -6,6 +6,7 @@
 1. Установить Joomla 4/5.
 2. Установить компонент из `/Users/just/Sites/главпро/component/com_glavpro_crm`.
 3. Открыть админ-страницу компонента и карточку компании.
+4. Для демо-данных: выполнить SQL из `/Users/just/Sites/главпро/component/com_glavpro_crm/administrator/components/com_glavpro_crm/sql/demo_seed.sql`.
 
 ## Архитектура
 - Компонент Joomla с собственными таблицами `#__glavpro_companies` и `#__glavpro_crm_events`.
@@ -25,7 +26,7 @@
 - Команда запуска: `vendor/bin/phpunit`.
 
 ### Лог прогона
-- Не запускалось в текущем окружении.
+- Лог сохранен в `/Users/just/Sites/главпро/tests/test-log.txt` (в окружении не найден `phpunit`).
 
 ## AI-workflow
 - Инструменты: указать используемые.

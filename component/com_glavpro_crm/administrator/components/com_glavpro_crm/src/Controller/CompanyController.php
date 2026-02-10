@@ -13,6 +13,33 @@ use Joomla\Database\ParameterType;
 
 final class CompanyController extends FormController
 {
+    public function createDemo(): void
+    {
+        $app = Factory::getApplication();
+        if (!Session::checkToken()) {
+            $app->enqueueMessage('Неверный токен формы', 'error');
+            $this->setRedirect($app->getRouter()->createUrl('index.php?option=com_glavpro_crm'));
+            return;
+        }
+
+        $db = Factory::getContainer()->get('DatabaseDriver');
+        $now = (new \DateTimeImmutable())->format('Y-m-d H:i:s');
+
+        $query = $db->getQuery(true)
+            ->insert($db->quoteName('#__glavpro_companies'))
+            ->columns([$db->quoteName('name'), $db->quoteName('stage_code'), $db->quoteName('created_at'), $db->quoteName('updated_at')])
+            ->values(':name, :stage, :created_at, :updated_at')
+            ->bind(':name', 'Demo Company')
+            ->bind(':stage', 'Ice')
+            ->bind(':created_at', $now)
+            ->bind(':updated_at', $now);
+
+        $db->setQuery($query);
+        $db->execute();
+
+        $companyId = (int) $db->insertid();
+        $this->setRedirect($app->getRouter()->createUrl('index.php?option=com_glavpro_crm&view=company&id=' . $companyId));
+    }
     public function addEvent(): void
     {
         $app = Factory::getApplication();

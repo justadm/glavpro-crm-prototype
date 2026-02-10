@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+    <providers>
+        <provider>provider.php</provider>
+    </providers>
+</service>

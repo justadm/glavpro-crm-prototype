@@ -24,7 +24,11 @@ final class HtmlView extends BaseHtmlView
         $company = $model->getCompany($companyId);
 
         if ($company === null) {
-            $app->enqueueMessage('Компания не найдена', 'error');
+            $app->enqueueMessage('Компания не найдена. Создайте демо-компанию кнопкой ниже.', 'warning');
+            $this->company = (object) ['id' => 0, 'name' => 'Demo Company', 'stage_code' => 'Ice'];
+            $this->events = [];
+            $this->actions = [];
+            $this->script = 'Скрипт: начните контакт с компанией.';
             parent::display($tpl);
             return;
         }
@@ -44,7 +48,7 @@ final class HtmlView extends BaseHtmlView
             'Aware' => 'Скрипт: заполните форму дискавери, чтобы перейти дальше.',
             'Interested' => 'Скрипт: запланируйте демо с датой и временем.',
             'demo_planned' => 'Скрипт: проведите демо по ссылке и зафиксируйте событие.',
-            'Demo_done' => 'Скрипт: подготовьте заявку или отправьте КП.',
+            'Demo_done' => 'Скрипт: подготовьте заявку, отправьте КП и выставьте счёт.',
             'Committed' => 'Скрипт: дождитесь оплаты для перехода.',
             'Customer' => 'Скрипт: выдайте первое удостоверение.',
             'Activated' => 'Скрипт: компания активирована.',
