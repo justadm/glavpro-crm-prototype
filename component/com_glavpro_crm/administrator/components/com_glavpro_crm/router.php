@@ -13,6 +13,7 @@ class GlavproCrmRouter extends RouterView
     {
         parent::__construct($app, $menu);
         $this->registerView('company');
+        $this->registerView('companies');
 
         $this->attachRule(new MenuRules($this));
         $this->attachRule(new StandardRules($this));

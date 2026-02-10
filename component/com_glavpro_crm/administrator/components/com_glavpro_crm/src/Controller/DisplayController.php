@@ -8,5 +8,5 @@ use Joomla\CMS\MVC\Controller\BaseController;
 
 final class DisplayController extends BaseController
 {
-    protected $default_view = 'company';
+    protected $default_view = 'companies';
 }
