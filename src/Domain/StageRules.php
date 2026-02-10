@@ -11,6 +11,7 @@ final class StageRules
      * Ключ: текущая стадия, значение: требуемое событие.
      */
     public const NEXT_STAGE_EVENT = [
+        StageCodes::ICE => EventTypes::ATTEMPT_CONTACT,
         StageCodes::TOUCHED => EventTypes::LPR_CALL_DONE,
         StageCodes::AWARE => EventTypes::DISCOVERY_FILLED,
         StageCodes::INTERESTED => EventTypes::DEMO_SCHEDULED,
@@ -38,6 +39,9 @@ final class StageRules
      * Доступные действия на стадии.
      */
     public const AVAILABLE_ACTIONS = [
+        StageCodes::ICE => [
+            'call',
+        ],
         StageCodes::TOUCHED => [
             'call',
             'comment_after_call',
