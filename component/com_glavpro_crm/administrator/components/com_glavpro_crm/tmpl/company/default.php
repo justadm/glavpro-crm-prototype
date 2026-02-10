@@ -85,6 +85,7 @@ $actionConfig = [
 
 <div><strong>Компания:</strong> <?php echo htmlspecialchars((string) $company->name); ?></div>
 <div><strong>Текущая стадия:</strong> <?php echo htmlspecialchars((string) $company->stage_code); ?></div>
+<div><a href="index.php?option=com_glavpro_crm&view=companies">К списку компаний</a></div>
 
 <?php if ((int) $company->id === 0) : ?>
     <form method="post" action="index.php?option=com_glavpro_crm&task=company.createDemo">

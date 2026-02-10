@@ -22,23 +22,41 @@ final class CompanyController extends FormController
             return;
         }
 
+        $input = $app->input;
+        $count = max(1, (int) $input->getInt('count', 1));
+        $count = min($count, 50);
+
         $db = Factory::getContainer()->get('DatabaseDriver');
         $now = (new \DateTimeImmutable())->format('Y-m-d H:i:s');
+        $firstId = null;
 
-        $query = $db->getQuery(true)
-            ->insert($db->quoteName('#__glavpro_companies'))
-            ->columns([$db->quoteName('name'), $db->quoteName('stage_code'), $db->quoteName('created_at'), $db->quoteName('updated_at')])
-            ->values(':name, :stage, :created_at, :updated_at')
-            ->bind(':name', 'Demo Company')
-            ->bind(':stage', 'Ice')
-            ->bind(':created_at', $now)
-            ->bind(':updated_at', $now);
+        $db->transactionStart();
+        for ($i = 1; $i <= $count; $i++) {
+            $name = $count === 1 ? 'Demo Company' : sprintf('Demo Company %d', $i);
+            $query = $db->getQuery(true)
+                ->insert($db->quoteName('#__glavpro_companies'))
+                ->columns([$db->quoteName('name'), $db->quoteName('stage_code'), $db->quoteName('created_at'), $db->quoteName('updated_at')])
+                ->values(':name, :stage, :created_at, :updated_at')
+                ->bind(':name', $name)
+                ->bind(':stage', 'Ice')
+                ->bind(':created_at', $now)
+                ->bind(':updated_at', $now);
 
-        $db->setQuery($query);
-        $db->execute();
+            $db->setQuery($query);
+            $db->execute();
 
-        $companyId = (int) $db->insertid();
-        $this->setRedirect($app->getRouter()->createUrl('index.php?option=com_glavpro_crm&view=company&id=' . $companyId));
+            if ($firstId === null) {
+                $firstId = (int) $db->insertid();
+            }
+        }
+        $db->transactionCommit();
+
+        if ($count === 1 && $firstId !== null) {
+            $this->setRedirect($app->getRouter()->createUrl('index.php?option=com_glavpro_crm&view=company&id=' . $firstId));
+            return;
+        }
+
+        $this->setRedirect($app->getRouter()->createUrl('index.php?option=com_glavpro_crm&view=companies'));
     }
     public function addEvent(): void
     {

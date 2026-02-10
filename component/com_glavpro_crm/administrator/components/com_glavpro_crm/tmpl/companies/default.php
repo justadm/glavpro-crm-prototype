@@ -3,10 +3,33 @@
 
 declare(strict_types=1);
 
+use Joomla\CMS\HTML\HTMLHelper;
+
 $items = $this->items;
+$pagination = $this->pagination;
+$search = (string) ($_GET['filter_search'] ?? '');
 ?>
 
 <h2>Список компаний</h2>
+
+<form method="get" action="index.php">
+    <input type="hidden" name="option" value="com_glavpro_crm">
+    <input type="hidden" name="view" value="companies">
+    <label>
+        Поиск по названию:
+        <input type="text" name="filter_search" value="<?php echo htmlspecialchars($search); ?>">
+    </label>
+    <button type="submit">Найти</button>
+</form>
+
+<form method="post" action="index.php?option=com_glavpro_crm&task=company.createDemo">
+    <label>
+        Создать демо-компаний:
+        <input type="number" name="count" min="1" max="50" value="1">
+    </label>
+    <button type="submit">Создать</button>
+    <?php echo HTMLHelper::_('form.token'); ?>
+</form>
 
 <?php if (empty($items)) : ?>
     <div>Компаний нет</div>
@@ -35,4 +58,7 @@ $items = $this->items;
             <?php endforeach; ?>
         </tbody>
     </table>
+    <?php if ($pagination) : ?>
+        <div><?php echo $pagination->getListFooter(); ?></div>
+    <?php endif; ?>
 <?php endif; ?>
