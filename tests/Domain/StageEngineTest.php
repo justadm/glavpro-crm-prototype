@@ -17,6 +17,18 @@ final class StageEngineTest extends TestCase
         $this->assertSame(['call'], $engine->getAvailableActions(StageCodes::TOUCHED, $events));
     }
 
+    public function testAdvanceFromIceWithAttemptContact(): void
+    {
+        $engine = new StageEngine();
+        $events = [
+            ['type' => EventTypes::ATTEMPT_CONTACT],
+        ];
+
+        $this->assertTrue($engine->canAdvance(StageCodes::ICE, $events));
+        $this->assertSame(StageCodes::TOUCHED, $engine->getNextStage(StageCodes::ICE, $events));
+        $this->assertSame(['call'], $engine->getAvailableActions(StageCodes::ICE, $events));
+    }
+
     public function testTouchedActionsAfterCall(): void
     {
         $engine = new StageEngine();
