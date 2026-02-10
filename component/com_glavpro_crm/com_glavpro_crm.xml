@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" method="upgrade" version="4.0" element="com_glavpro_crm">
+    <name>com_glavpro_crm</name>
+    <author>Glavpro</author>
+    <version>0.1.0</version>
+    <description>Прототип CRM-воронки (стадии + события)</description>
+
+    <files folder="components/com_glavpro_crm">
+        <folder>src</folder>
+        <folder>tmpl</folder>
+    </files>
+
+    <administration>
+        <menu>Glavpro CRM</menu>
+        <files folder="administrator/components/com_glavpro_crm">
+            <folder>src</folder>
+            <folder>tmpl</folder>
+            <folder>sql</folder>
+        </files>
+    </administration>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8mb4">sql/install.mysql.utf8mb4.sql</file>
+        </sql>
+    </install>
+</extension>
