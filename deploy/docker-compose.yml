@@ -1,0 +1,23 @@
+services:
+  db:
+    image: mariadb:10.11
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: joomla
+      MYSQL_USER: joomla
+      MYSQL_PASSWORD: joomla
+    volumes:
+      - db_data:/var/lib/mysql
+
+  joomla:
+    image: joomla:latest
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+    volumes:
+      - joomla_data:/var/www/html
+
+volumes:
+  db_data:
+  joomla_data:

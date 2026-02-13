@@ -4,4 +4,6 @@
 /.idea
 /.vscode
 .phpunit.result.cache
+/dist
+/deploy/.env
 .DS_Store

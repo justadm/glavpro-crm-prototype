@@ -13,6 +13,11 @@
 4. Для демо-данных выполнить SQL из `/Users/just/Sites/главпро/component/com_glavpro_crm/administrator/components/com_glavpro_crm/sql/demo_seed.sql`.
 5. Команды для тестов: `composer install` и `vendor/bin/phpunit --configuration phpunit.xml`.
 
+## Демо-стенд (Docker)
+- Инструкция: `/Users/just/Sites/главпро/deploy/README.md`.
+- Запуск: `docker compose -f deploy/docker-compose.yml up -d`.
+- Сборка ZIP компонента: `bash scripts/build_component_zip.sh`.
+
 ## Установка на хостинг
 - Убедиться, что PHP 8.1+ и MySQL 8+ (или MariaDB 10.4+).
 - Установить Joomla 4/5 на хостинг.
