@@ -34,7 +34,7 @@ $search = (string) ($_GET['filter_search'] ?? '');
 <?php if (empty($items)) : ?>
     <div>Компаний нет</div>
 <?php else : ?>
-    <table>
+    <table style="width: 100%;">
         <thead>
             <tr>
                 <th>ID</th>

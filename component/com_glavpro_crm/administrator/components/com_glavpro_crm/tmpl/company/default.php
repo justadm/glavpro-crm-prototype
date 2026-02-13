@@ -150,7 +150,7 @@ $actionConfig = [
 <?php if (empty($events)) : ?>
     <div>Событий нет</div>
 <?php else : ?>
-    <table>
+    <table style="width: 100%;">
         <thead>
             <tr>
                 <th>Тип</th>
