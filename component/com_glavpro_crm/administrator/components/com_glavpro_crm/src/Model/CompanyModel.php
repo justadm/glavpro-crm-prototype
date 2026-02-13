@@ -11,6 +11,15 @@ use Joomla\Database\ParameterType;
 
 final class CompanyModel extends ItemModel
 {
+    public function getItem($pk = null): object
+    {
+        $id = (int) ($pk ?? Factory::getApplication()->input->getInt('id'));
+        $company = $this->getCompany($id);
+
+        // ItemModelInterface requires an object return type; keep UI logic in the view.
+        return $company ?? (object) ['id' => 0, 'name' => '', 'stage_code' => 'Ice'];
+    }
+
     public function getCompany(int $companyId): ?object
     {
         $db = Factory::getContainer()->get('DatabaseDriver');
