@@ -11,6 +11,7 @@ use Joomla\CMS\Router\Route;
 final class HtmlView extends BaseHtmlView
 {
     public array $items = [];
+    public string $search = '';
 
     public function display($tpl = null): void
     {
@@ -24,6 +25,7 @@ final class HtmlView extends BaseHtmlView
             return;
         }
 
+        $this->search = (string) $app->input->getString('filter_search', '');
         $this->items = $this->get('Items');
         parent::display($tpl);
     }

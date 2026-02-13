@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace Glavpro\Component\GlavproCrm\Site\Model;
 
+// Fallback for environments where the extension namespace autoload is not yet active.
+require_once __DIR__ . '/../Domain/StageCodes.php';
+require_once __DIR__ . '/../Domain/EventTypes.php';
+require_once __DIR__ . '/../Domain/StageRules.php';
+require_once __DIR__ . '/../Domain/StageEngine.php';
+
+use Glavpro\Component\GlavproCrm\Domain\StageEngine;
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Model\ItemModel;
 use Joomla\Database\ParameterType;
@@ -28,7 +35,7 @@ final class CompanyModel extends ItemModel
     }
 
     /**
-     * @return array<int, array{type:string, created_at:string, payload:?string}>
+     * @return array<int, array{type:string, created_at?:\DateTimeInterface, payload:?string}>
      */
     public function getEvents(int $companyId): array
     {
@@ -47,11 +54,27 @@ final class CompanyModel extends ItemModel
         foreach ($rows as $row) {
             $events[] = [
                 'type' => (string) ($row['event_type'] ?? ''),
-                'created_at' => (string) ($row['created_at'] ?? ''),
+                'created_at' => new \DateTimeImmutable((string) ($row['created_at'] ?? 'now')),
                 'payload' => isset($row['payload']) ? (string) $row['payload'] : null,
             ];
         }
 
         return $events;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getAvailableActions(int $companyId): array
+    {
+        $company = $this->getItem($companyId);
+        if ((int) ($company->id ?? 0) <= 0) {
+            return [];
+        }
+
+        $events = $this->getEvents($companyId);
+        $engine = new StageEngine();
+
+        return $engine->getAvailableActions((string) $company->stage_code, $events);
     }
 }
