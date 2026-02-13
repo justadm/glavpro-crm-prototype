@@ -15,7 +15,8 @@
 
 ## Демо-стенд (Docker)
 - Инструкция: `/Users/just/Sites/главпро/deploy/README.md`.
-- Запуск: `docker compose -f deploy/docker-compose.yml up -d`.
+- Запуск (локально): `docker compose -f deploy/docker-compose.yml -f deploy/docker-compose.dev.yml up -d`.
+- Запуск (сервер): `docker compose -p glavpro -f deploy/docker-compose.yml -f deploy/docker-compose.prod.yml up -d`.
 - Сборка ZIP компонента: `bash scripts/build_component_zip.sh`.
 
 ## Установка на хостинг

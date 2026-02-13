@@ -1,0 +1,4 @@
+services:
+  joomla:
+    ports:
+      - "8080:80"

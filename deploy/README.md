@@ -8,7 +8,7 @@
 ## Запуск
 1. В каталоге репозитория:
 
-   docker compose -f deploy/docker-compose.yml up -d
+   docker compose -f deploy/docker-compose.yml -f deploy/docker-compose.dev.yml up -d
 
 Прод-режим (на сервере, привязка только к localhost):
 
