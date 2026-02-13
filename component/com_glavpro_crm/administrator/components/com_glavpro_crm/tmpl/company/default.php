@@ -9,6 +9,18 @@ $company = $this->company;
 $actions = $this->actions;
 $events = $this->events;
 
+$formatEventDate = static function ($value): string {
+    if ($value instanceof \DateTimeInterface) {
+        return $value->format('Y-m-d H:i:s');
+    }
+
+    if (is_string($value)) {
+        return $value;
+    }
+
+    return '';
+};
+
 $actionConfig = [
     'call' => [
         'label' => 'Попытка контакта',
@@ -149,7 +161,7 @@ $actionConfig = [
             <?php foreach ($events as $event) : ?>
                 <tr>
                     <td><?php echo htmlspecialchars((string) $event['type']); ?></td>
-                    <td><?php echo htmlspecialchars((string) ($event['created_at'] ?? '')); ?></td>
+                    <td><?php echo htmlspecialchars($formatEventDate($event['created_at'] ?? null)); ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
