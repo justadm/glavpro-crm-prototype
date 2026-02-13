@@ -28,8 +28,9 @@ final class CompaniesModel extends ListModel
 
         $search = $this->getState('filter.search');
         if ($search !== '') {
+            $like = '%' . $search . '%';
             $query->where($db->quoteName('name') . ' LIKE :search')
-                ->bind(':search', '%' . $search . '%', ParameterType::STRING);
+                ->bind(':search', $like, ParameterType::STRING);
         }
 
         $query->order($db->quoteName('updated_at') . ' DESC');

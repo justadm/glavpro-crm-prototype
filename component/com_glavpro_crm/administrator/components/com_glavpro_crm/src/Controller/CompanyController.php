@@ -35,6 +35,7 @@ final class CompanyController extends FormController
         $db = Factory::getContainer()->get('DatabaseDriver');
         $now = (new \DateTimeImmutable())->format('Y-m-d H:i:s');
         $firstId = null;
+        $stage = 'Ice';
 
         $db->transactionStart();
         for ($i = 1; $i <= $count; $i++) {
@@ -44,7 +45,7 @@ final class CompanyController extends FormController
                 ->columns([$db->quoteName('name'), $db->quoteName('stage_code'), $db->quoteName('created_at'), $db->quoteName('updated_at')])
                 ->values(':name, :stage, :created_at, :updated_at')
                 ->bind(':name', $name)
-                ->bind(':stage', 'Ice')
+                ->bind(':stage', $stage)
                 ->bind(':created_at', $now)
                 ->bind(':updated_at', $now);
 
