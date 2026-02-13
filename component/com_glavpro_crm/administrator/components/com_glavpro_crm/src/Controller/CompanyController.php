@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 namespace Glavpro\Component\GlavproCrm\Administrator\Controller;
 
+// Fallback for environments where the extension namespace autoload is not yet active.
+require_once __DIR__ . '/../Domain/StageCodes.php';
+require_once __DIR__ . '/../Domain/EventTypes.php';
+require_once __DIR__ . '/../Domain/StageRules.php';
+require_once __DIR__ . '/../Domain/StageEngine.php';
+
 use Glavpro\Component\GlavproCrm\Domain\EventTypes;
 use Glavpro\Component\GlavproCrm\Domain\StageEngine;
 use Joomla\CMS\Factory;
