@@ -6,26 +6,39 @@
 - Выбран компонент Joomla, потому что требуется отдельная модель данных, контроллеры, представления и удобная маршрутизация внутри админки.
 - Компонент позволяет изолировать бизнес‑логику стадий и обеспечить тестируемость.
 
+## Что реализовано
+- UI “карточка компании” (стадия, доступные действия, инструкция/скрипт, история событий).
+- Ограничения на действия по стадиям (нельзя “перепрыгнуть” без обязательных событий).
+- Журнал событий компании (`#__glavpro_crm_events`) + текущая стадия в компании (`#__glavpro_companies`).
+- Демо-режим: генерация компаний.
+- Два интерфейса:
+  - фронтенд (для менеджера): список компаний + карточка + действия (требует авторизации),
+  - админка (для проверки/отладки): список компаний + карточка + действия.
+
 ## Быстрый запуск
-1. Установить Joomla 4/5.
-2. Установить компонент из `/Users/just/Sites/главпро/component/com_glavpro_crm`.
-3. Открыть админ-страницу компонента и список компаний.
-4. Для демо-данных выполнить SQL из `/Users/just/Sites/главпро/component/com_glavpro_crm/administrator/components/com_glavpro_crm/sql/demo_seed.sql`.
-5. Команды для тестов: `composer install` и `vendor/bin/phpunit --configuration phpunit.xml`.
+1. Поднять Joomla (рекомендовано Joomla 6 + PHP 8.2/8.3).
+2. Собрать ZIP компонента: `bash scripts/build_component_zip.sh` (результат: `dist/com_glavpro_crm.zip`).
+3. Установить ZIP в админке Joomla: `System` → `Install Extensions`.
+4. Открыть компонент:
+   - админка: `Components` → `Glavpro CRM`,
+   - фронтенд: создать пункт меню, ведущий на `index.php?option=com_glavpro_crm&view=companies` (после включения URL rewriting будет без `index.php`).
+5. Создать пользователя Joomla и войти на фронтенде (фронтенд CRM закрыт для гостей).
+
+Если таблицы не создались автоматически при установке (редкий случай в зависимости от окружения), выполнить SQL вручную:
+- `component/com_glavpro_crm/sql/install.mysql.utf8mb4.sql`.
 
 ## Демо-стенд (Docker)
-- Инструкция: `/Users/just/Sites/главпро/deploy/README.md`.
+- Инструкция: `deploy/README.md`.
 - Запуск (локально): `docker compose -f deploy/docker-compose.yml -f deploy/docker-compose.dev.yml up -d`.
 - Запуск (сервер): `docker compose -p glavpro -f deploy/docker-compose.yml -f deploy/docker-compose.prod.yml up -d`.
 - Сборка ZIP компонента: `bash scripts/build_component_zip.sh`.
 
 ## Установка на хостинг
-- Убедиться, что PHP 8.1+ и MySQL 8+ (или MariaDB 10.4+).
-- Установить Joomla 4/5 на хостинг.
-- Загрузить компонент как архив или папкой `component/com_glavpro_crm`.
-- В админке Joomla выполнить установку компонента.
-- При необходимости выполнить SQL демо-данных.
-- Проверить доступ к странице админ‑компонента.
+- Убедиться, что PHP 8.2+ и MySQL 8+ (или MariaDB 10.4+).
+- Установить Joomla 6 на хостинг.
+- Установить компонент как ZIP (`dist/com_glavpro_crm.zip`) через `System` → `Install Extensions`.
+- Включить SEF и URL rewriting (по желанию): `System` → `Global Configuration` → `SEO Settings`.
+- Для фронтенда создать пункт меню на CRM (см. “Быстрый запуск”).
 
 ## Архитектура
 - Компонент Joomla с собственными таблицами `#__glavpro_companies` и `#__glavpro_crm_events`.
@@ -42,14 +55,14 @@
 - Доступность действий в карточке = запрет “перепрыгивания” стадий.
 
 ## Acceptance Criteria (Given/When/Then)
-- Полная матрица в `/Users/just/Sites/главпро/acceptance.md`.
+- Полная матрица в `acceptance.md`.
 
 ## Тесты
 - Unit-тесты: `StageEngineTest`.
 - Команды запуска: `composer install` и `vendor/bin/phpunit --configuration phpunit.xml`.
 
 ### Лог прогона
-- Лог сохранен в `/Users/just/Sites/главпро/tests/test-log.txt`.
+- Лог сохранен в `tests/test-log.txt`.
 
 ## AI-workflow
 - Инструменты: AI‑ассистент Codex (ChatGPT).
@@ -66,9 +79,9 @@
 - Баг: нельзя было перейти со стадии Ice на Touched после события `attempt_contact`.
 - Коммит с тестом, который выявил баг: `743bc78`.
 - Коммит с фиксом (добавлено правило перехода и действие): `611cb77`.
-- Актуальный лог прогона тестов: `/Users/just/Sites/главпро/tests/test-log.txt`.
+- Актуальный лог прогона тестов: `tests/test-log.txt`.
 
 ## Улучшения
-- Полная интеграция с UI Joomla (формы и права доступа).
-- Роли менеджеров и разграничение действий.
-- Больше интеграционных тестов.
+- Права доступа на уровне ACL Joomla (группы менеджеров/руководителей вместо “просто авторизован”).
+- Сохранение/отображение payload в истории событий (сейчас payload сохраняется, но на UI не выводится).
+- Больше интеграционных тестов (HTTP/DB) для Joomla-части.
