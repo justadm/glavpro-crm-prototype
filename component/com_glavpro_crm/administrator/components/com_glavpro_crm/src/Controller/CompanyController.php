@@ -14,6 +14,7 @@ use Glavpro\Component\GlavproCrm\Domain\EventTypes;
 use Glavpro\Component\GlavproCrm\Domain\StageEngine;
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Controller\FormController;
+use Joomla\CMS\Router\Route;
 use Joomla\CMS\Session\Session;
 use Joomla\Database\ParameterType;
 
@@ -24,7 +25,7 @@ final class CompanyController extends FormController
         $app = Factory::getApplication();
         if (!Session::checkToken()) {
             $app->enqueueMessage('Неверный токен формы', 'error');
-            $this->setRedirect($app->getRouter()->createUrl('index.php?option=com_glavpro_crm'));
+            $this->setRedirect(Route::_('index.php?option=com_glavpro_crm', false));
             return;
         }
 
@@ -59,18 +60,18 @@ final class CompanyController extends FormController
         $db->transactionCommit();
 
         if ($count === 1 && $firstId !== null) {
-            $this->setRedirect($app->getRouter()->createUrl('index.php?option=com_glavpro_crm&view=company&id=' . $firstId));
+            $this->setRedirect(Route::_('index.php?option=com_glavpro_crm&view=company&id=' . $firstId, false));
             return;
         }
 
-        $this->setRedirect($app->getRouter()->createUrl('index.php?option=com_glavpro_crm&view=companies'));
+        $this->setRedirect(Route::_('index.php?option=com_glavpro_crm&view=companies', false));
     }
     public function addEvent(): void
     {
         $app = Factory::getApplication();
         if (!Session::checkToken()) {
             $app->enqueueMessage('Неверный токен формы', 'error');
-            $this->setRedirect($app->getRouter()->createUrl('index.php?option=com_glavpro_crm'));
+            $this->setRedirect(Route::_('index.php?option=com_glavpro_crm', false));
             return;
         }
         $input = $app->input;
@@ -81,7 +82,7 @@ final class CompanyController extends FormController
 
         if ($companyId <= 0 || $eventType === '' || !in_array($eventType, EventTypes::ALL, true)) {
             $app->enqueueMessage('Некорректные параметры события', 'error');
-            $this->setRedirect($app->getRouter()->createUrl('index.php?option=com_glavpro_crm'));
+            $this->setRedirect(Route::_('index.php?option=com_glavpro_crm', false));
             return;
         }
 
@@ -122,7 +123,7 @@ final class CompanyController extends FormController
             }
         }
 
-        $this->setRedirect($app->getRouter()->createUrl('index.php?option=com_glavpro_crm&view=company&id=' . $companyId));
+        $this->setRedirect(Route::_('index.php?option=com_glavpro_crm&view=company&id=' . $companyId, false));
     }
 
     private function loadCompany(int $companyId): ?object
