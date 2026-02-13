@@ -16,11 +16,13 @@ final class StageEngine
     public function getAvailableActions(string $stage, array $events): array
     {
         if ($stage === StageCodes::TOUCHED) {
-            if ($this->hasEvent($events, EventTypes::LPR_CALL_DONE)) {
+            // В стадии Touched сначала фиксируем попытки контакта, затем — разговор с ЛПР.
+            // Иначе пользователь застревает: "comment_after_call" (lpr_call_done) никогда не появляется.
+            if ($this->hasEvent($events, EventTypes::ATTEMPT_CONTACT)) {
                 return ['comment_after_call', 'fill_discovery'];
             }
 
-            return ['call'];
+            return ['call', 'comment_after_call', 'fill_discovery'];
         }
 
         if ($stage === StageCodes::DEMO_DONE && !$this->hasRecentDemo($events, 60)) {
