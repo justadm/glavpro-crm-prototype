@@ -4,6 +4,7 @@
 declare(strict_types=1);
 
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Router\Route;
 
 $items = $this->items;
 $search = $this->search ?? '';
@@ -25,7 +26,7 @@ $search = $this->search ?? '';
   <h2>Компании (демо)</h2>
 
   <div class="gp-row">
-    <form class="gp-col" method="get" action="index.php">
+    <form class="gp-col" method="get" action="<?php echo Route::_('index.php', false); ?>">
       <input type="hidden" name="option" value="com_glavpro_crm">
       <input type="hidden" name="view" value="companies">
       <label>
@@ -35,7 +36,7 @@ $search = $this->search ?? '';
       <button type="submit">Найти</button>
     </form>
 
-    <form class="gp-col" method="post" action="index.php?option=com_glavpro_crm&task=company.createDemo">
+    <form class="gp-col" method="post" action="<?php echo Route::_('index.php?option=com_glavpro_crm&task=company.createDemo', false); ?>">
       <label>
         Создать демо-компаний:
         <input type="number" name="count" min="1" max="50" value="1">
@@ -66,7 +67,7 @@ $search = $this->search ?? '';
           <td><?php echo htmlspecialchars((string) $item->stage_code); ?></td>
           <td><?php echo htmlspecialchars((string) $item->updated_at); ?></td>
           <td>
-            <a href="index.php?option=com_glavpro_crm&view=company&id=<?php echo (int) $item->id; ?>">Открыть</a>
+            <a href="<?php echo Route::_('index.php?option=com_glavpro_crm&view=company&id=' . (int) $item->id, false); ?>">Открыть</a>
           </td>
         </tr>
       <?php endforeach; ?>

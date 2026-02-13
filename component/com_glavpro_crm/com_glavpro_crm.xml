@@ -2,7 +2,7 @@
 <extension type="component" method="upgrade" element="com_glavpro_crm">
     <name>com_glavpro_crm</name>
     <author>Glavpro</author>
-    <version>0.4.1</version>
+    <version>0.4.2</version>
     <description>Прототип CRM-воронки (стадии + события)</description>
 
     <namespace path="src">Glavpro\Component\GlavproCrm</namespace>

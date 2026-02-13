@@ -4,6 +4,7 @@
 declare(strict_types=1);
 
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Router\Route;
 
 $company = $this->company;
 $actions = $this->actions;
@@ -122,7 +123,7 @@ $actionConfig = [
 <div class="gp-row">
   <div class="gp-cell"><strong>Компания:</strong> <?php echo htmlspecialchars((string) $company->name); ?></div>
   <div class="gp-cell"><strong>Текущая стадия:</strong> <?php echo htmlspecialchars((string) $company->stage_code); ?></div>
-  <div class="gp-cell gp-link"><a href="index.php?option=com_glavpro_crm&view=companies">К списку компаний</a></div>
+  <div class="gp-cell gp-link"><a href="<?php echo Route::_('index.php?option=com_glavpro_crm&view=companies', false); ?>">К списку компаний</a></div>
 </div>
 
 <h3>Доступные действия</h3>
@@ -136,7 +137,7 @@ $actionConfig = [
       <?php continue; ?>
     <?php endif; ?>
 
-    <form method="post" action="index.php?option=com_glavpro_crm&task=company.addEvent">
+    <form method="post" action="<?php echo Route::_('index.php?option=com_glavpro_crm&task=company.addEvent', false); ?>">
       <fieldset>
         <legend><?php echo htmlspecialchars($config['label']); ?></legend>
         <input type="hidden" name="company_id" value="<?php echo (int) $company->id; ?>">
