@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Glavpro\Administrator\Component\GlavproCrm\View\Company;
+namespace Glavpro\Component\GlavproCrm\Administrator\View\Company;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
@@ -19,7 +19,7 @@ final class HtmlView extends BaseHtmlView
         $app = Factory::getApplication();
         $companyId = (int) $app->input->getInt('id');
 
-        /** @var \Glavpro\Administrator\Component\GlavproCrm\Model\CompanyModel $model */
+        /** @var \Glavpro\Component\GlavproCrm\Administrator\Model\CompanyModel $model */
         $model = $this->getModel();
         $company = $model->getCompany($companyId);
 

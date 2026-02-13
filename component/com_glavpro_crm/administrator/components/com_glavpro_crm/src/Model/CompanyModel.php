@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Glavpro\Administrator\Component\GlavproCrm\Model;
+namespace Glavpro\Component\GlavproCrm\Administrator\Model;
 
-use Glavpro\Domain\StageEngine;
+use Glavpro\Component\GlavproCrm\Domain\StageEngine;
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Model\ItemModel;
 use Joomla\Database\ParameterType;

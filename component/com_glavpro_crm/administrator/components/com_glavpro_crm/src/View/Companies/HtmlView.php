@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Glavpro\Administrator\Component\GlavproCrm\View\Companies;
+namespace Glavpro\Component\GlavproCrm\Administrator\View\Companies;
 
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 

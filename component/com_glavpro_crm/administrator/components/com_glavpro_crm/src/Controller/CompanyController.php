@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Glavpro\Administrator\Component\GlavproCrm\Controller;
+namespace Glavpro\Component\GlavproCrm\Administrator\Controller;
 
-use Glavpro\Domain\EventTypes;
-use Glavpro\Domain\StageEngine;
+use Glavpro\Component\GlavproCrm\Domain\EventTypes;
+use Glavpro\Component\GlavproCrm\Domain\StageEngine;
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Controller\FormController;
 use Joomla\CMS\Session\Session;

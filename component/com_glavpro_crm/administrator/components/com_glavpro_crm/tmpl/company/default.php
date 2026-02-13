@@ -1,5 +1,5 @@
 <?php
-/** @var \Glavpro\Administrator\Component\GlavproCrm\View\Company\HtmlView $this */
+/** @var \Glavpro\Component\GlavproCrm\Administrator\View\Company\HtmlView $this */
 
 declare(strict_types=1);
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Glavpro\Site\Component\GlavproCrm\Model;
+namespace Glavpro\Component\GlavproCrm\Site\Model;
 
 use Joomla\CMS\MVC\Model\ItemModel;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Glavpro\Administrator\Component\GlavproCrm\Model;
+namespace Glavpro\Component\GlavproCrm\Administrator\Model;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Model\ListModel;

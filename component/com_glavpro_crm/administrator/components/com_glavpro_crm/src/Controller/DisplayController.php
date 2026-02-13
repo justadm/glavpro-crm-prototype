@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Glavpro\Administrator\Component\GlavproCrm\Controller;
+namespace Glavpro\Component\GlavproCrm\Administrator\Controller;
 
 use Joomla\CMS\MVC\Controller\BaseController;
 
