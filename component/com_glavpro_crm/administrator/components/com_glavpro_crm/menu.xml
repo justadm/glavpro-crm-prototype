@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu>
     <submenu>
-        <menu link="index.php?option=com_glavpro_crm&view=companies" img="class:briefcase">Компании</menu>
-        <menu link="index.php?option=com_glavpro_crm&view=company" img="class:briefcase">Карточка компании</menu>
+        <menu link="index.php?option=com_glavpro_crm&amp;view=companies" img="class:briefcase">Компании</menu>
+        <menu link="index.php?option=com_glavpro_crm&amp;view=company" img="class:briefcase">Карточка компании</menu>
     </submenu>
 </menu>
