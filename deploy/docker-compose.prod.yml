@@ -1,0 +1,8 @@
+services:
+  db:
+    restart: unless-stopped
+
+  joomla:
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:18080:80"

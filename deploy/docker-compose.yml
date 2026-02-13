@@ -15,6 +15,11 @@ services:
       - db
     ports:
       - "8080:80"
+    environment:
+      JOOMLA_DB_HOST: db
+      JOOMLA_DB_USER: joomla
+      JOOMLA_DB_PASSWORD: joomla
+      JOOMLA_DB_NAME: joomla
     volumes:
       - joomla_data:/var/www/html
 

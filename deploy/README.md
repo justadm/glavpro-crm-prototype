@@ -10,6 +10,10 @@
 
    docker compose -f deploy/docker-compose.yml up -d
 
+Прод-режим (на сервере, привязка только к localhost):
+
+   docker compose -p glavpro -f deploy/docker-compose.yml -f deploy/docker-compose.prod.yml up -d
+
 2. Открыть сайт:
 
    http://localhost:8080
