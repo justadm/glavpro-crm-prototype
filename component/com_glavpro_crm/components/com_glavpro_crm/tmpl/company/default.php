@@ -93,7 +93,25 @@ $actionConfig = [
 ];
 ?>
 
-<h2>Карточка компании</h2>
+<style>
+  .gp-crm { --gp-gap: 1rem; }
+  .gp-crm > * { margin: 0 0 var(--gp-gap) 0; }
+  .gp-crm .gp-row { display: flex; gap: var(--gp-gap); align-items: baseline; flex-wrap: wrap; }
+  .gp-crm .gp-cell { flex: 1 1 200px; min-width: 200px; }
+  .gp-crm .gp-cell.gp-link { text-align: right; }
+  .gp-crm label { display: block; }
+  .gp-crm input[type="text"],
+  .gp-crm input[type="number"],
+  .gp-crm textarea { display: block; width: 100%; margin: 1rem 0; box-sizing: border-box; }
+  .gp-crm table { width: 100%; }
+  .gp-crm fieldset { margin: 0 0 var(--gp-gap) 0; }
+  @media (max-width: 640px) {
+    .gp-crm .gp-cell.gp-link { text-align: left; }
+  }
+</style>
+
+<div class="gp-crm">
+  <h2>Карточка компании</h2>
 
 <?php if ((int) ($company->id ?? 0) <= 0) : ?>
   <div>Компания не найдена</div>
@@ -101,9 +119,11 @@ $actionConfig = [
   <?php return; ?>
 <?php endif; ?>
 
-<div><strong>Компания:</strong> <?php echo htmlspecialchars((string) $company->name); ?></div>
-<div><strong>Текущая стадия:</strong> <?php echo htmlspecialchars((string) $company->stage_code); ?></div>
-<div><a href="index.php?option=com_glavpro_crm&view=companies">К списку компаний</a></div>
+<div class="gp-row">
+  <div class="gp-cell"><strong>Компания:</strong> <?php echo htmlspecialchars((string) $company->name); ?></div>
+  <div class="gp-cell"><strong>Текущая стадия:</strong> <?php echo htmlspecialchars((string) $company->stage_code); ?></div>
+  <div class="gp-cell gp-link"><a href="index.php?option=com_glavpro_crm&view=companies">К списку компаний</a></div>
+</div>
 
 <h3>Доступные действия</h3>
 <?php if (empty($actions)) : ?>
@@ -166,3 +186,4 @@ $actionConfig = [
     </tbody>
   </table>
 <?php endif; ?>
+</div>
