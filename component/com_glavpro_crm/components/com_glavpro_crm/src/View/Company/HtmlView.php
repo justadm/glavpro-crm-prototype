@@ -6,6 +6,7 @@ namespace Glavpro\Component\GlavproCrm\Site\View\Company;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
+use Joomla\CMS\Router\Route;
 
 final class HtmlView extends BaseHtmlView
 {
@@ -15,6 +16,15 @@ final class HtmlView extends BaseHtmlView
     public function display($tpl = null): void
     {
         $app = Factory::getApplication();
+        $user = $app->getIdentity();
+        if ($user->guest) {
+            $app->enqueueMessage('Для просмотра CRM нужно войти.', 'warning');
+            $companyId = (int) $app->input->getInt('id');
+            $return = base64_encode('index.php?option=com_glavpro_crm&view=company&id=' . $companyId);
+            $app->redirect(Route::_('index.php?option=com_users&view=login&return=' . $return, false));
+            return;
+        }
+
         $companyId = (int) $app->input->getInt('id');
 
         /** @var \Glavpro\Component\GlavproCrm\Site\Model\CompanyModel $model */
